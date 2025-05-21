@@ -1,0 +1,17 @@
+[Unit]
+Description=Security Monitor Service
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/security-monitor
+ExecStart=/usr/bin/python3 /opt/security-monitor/security_monitor.py
+Restart=always
+RestartSec=30
+StandardOutput=append:/var/log/security-monitor/service.log
+StandardError=append:/var/log/security-monitor/service.error.log
+
+[Install]
+WantedBy=multi-user.target 
