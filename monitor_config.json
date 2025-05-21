@@ -1,0 +1,30 @@
+{
+    "patterns": {
+        "binary_injection": "\\x[0-9a-fA-F]{2}",
+        "sql_injection": "(?i)(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|ALTER|EXEC)",
+        "xss": "(?i)(<script|javascript:|onerror=|onload=)",
+        "path_traversal": "\\.\\./|\\.\\.\\\\",
+        "command_injection": "(?i)(;|&&|\\|\\||`|\\$)",
+        "php_injection": "(?i)(php|phtml|php3|php4|php5|php7|phar|pht|phps)",
+        "shell_commands": "(?i)(bash|sh|cmd|powershell|wget|curl|nc|netcat)",
+        "suspicious_headers": "(?i)(x-forwarded-for|x-real-ip|via|forwarded)"
+    },
+    "thresholds": {
+        "max_failed_auth": 5,
+        "max_pattern_matches": 3,
+        "max_requests_per_minute": 100
+    },
+    "docker_containers": ["fleetbase-httpd-latest"],
+    "block_duration": 86400,
+    "check_interval": 1800,
+    "log_retention_days": 30,
+    "notification": {
+        "email": {
+            "enabled": false,
+            "smtp_server": "",
+            "smtp_port": 587,
+            "sender": "",
+            "recipients": []
+        }
+    }
+} 
