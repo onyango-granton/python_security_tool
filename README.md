@@ -1,5 +1,7 @@
 # Docker Security Monitor
 
+> **Disclaimer:** This tool is designed and tested for Linux-based systems. Compatibility with other operating systems is not guaranteed.
+
 A comprehensive security monitoring system for Docker containers that automatically detects and blocks malicious activities.
 
 ## Overview
@@ -15,6 +17,18 @@ This tool monitors Docker container logs for suspicious activities and automatic
 - Suspicious shell commands
 - Suspicious HTTP headers
 
+## Requirements
+
+- **Docker** or **Docker Image** (latest stable version recommended)
+- **Python 3.7+**
+- **pip** (Python package manager)
+- **systemd** (for running the monitoring service)
+- **iptables** (for IP blocking)
+- **git** (for cloning the repository)
+- **curl** or **wget** (for downloading dependencies, if needed)
+
+> _Note: Ensure you have root or sudo privileges for installation and service management._
+
 ## How It Works
 
 ### 1. Log Monitoring
@@ -28,11 +42,11 @@ The system continuously monitors your Docker container logs for:
 The tool uses predefined patterns to identify potential attacks:
 ```json
 {
-    "binary_injection": "\\x[0-9a-fA-F]{2}",  // Detects binary data in requests
-    "sql_injection": "(?i)(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|ALTER|EXEC)",  // SQL commands
-    "xss": "(?i)(<script|javascript:|onerror=|onload=)",  // XSS attempts
-    "path_traversal": "\\.\\./|\\.\\.\\\\",  // Directory traversal attempts
-    "command_injection": "(?i)(;|&&|\\|\\||`|\\$)"  // Command injection attempts
+   "binary_injection": "\\x[0-9a-fA-F]{2}",  // Detects binary data in requests
+   "sql_injection": "(?i)(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|ALTER|EXEC)",  // SQL commands
+   "xss": "(?i)(<script|javascript:|onerror=|onload=)",  // XSS attempts
+   "path_traversal": "\\.\\./|\\.\\.\\\\",  // Directory traversal attempts
+   "command_injection": "(?i)(;|&&|\\|\\||`|\\$)"  // Command injection attempts
 }
 ```
 
@@ -79,8 +93,8 @@ Sets up the entire system:
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/onyango-granton/python_security_tool.gi
+cd docker_error_logs
 ```
 
 2. Make the installation script executable:
@@ -101,7 +115,7 @@ Edit `monitor_config.json` to customize:
 Add or modify patterns to detect specific types of attacks:
 ```json
 "patterns": {
-    "your_pattern_name": "your_regex_pattern"
+   "your_pattern_name": "your_regex_pattern"
 }
 ```
 
@@ -109,9 +123,9 @@ Add or modify patterns to detect specific types of attacks:
 Adjust when IPs get blocked:
 ```json
 "thresholds": {
-    "max_failed_auth": 5,        // Number of failed login attempts
-    "max_pattern_matches": 3,    // Number of pattern matches
-    "max_requests_per_minute": 100  // Rate limiting
+   "max_failed_auth": 5,        // Number of failed login attempts
+   "max_pattern_matches": 3,    // Number of pattern matches
+   "max_requests_per_minute": 100  // Rate limiting
 }
 ```
 
@@ -206,10 +220,10 @@ Feel free to:
 
 ## License
 
-[Your License Here]
+[MIT LICENSE](LICENSE)
 
 ## Support
 
 For issues and support:
 - Open an issue in the repository
-- Contact [Your Contact Information] 
+- Contact [Granton Onyango](https://www.linkedin.com/in/granton-onyango/) 
